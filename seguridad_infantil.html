@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estándares de Seguridad Infantil – App Falleros</title>
+  <style>
+    :root {
+      --primary:    #1b3a6b;
+      --secondary:  #2e75b6;
+      --accent-bg:  #e8f0fb;
+      --text:       #1a1a2e;
+      --text-gray:  #555;
+      --border:     #ccc;
+      --light-bg:   #f7f7f7;
+      --green:      #1a7f4b;
+      --green-bg:   #f0fff8;
+      --red:        #c00000;
+      --red-bg:     #fff0f0;
+      --warn-bg:    #fff9e6;
+      --warn-border:#e6a817;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 16px;
+      color: var(--text);
+      background: #f0f4f8;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 48px 0 0;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      color: #a8c8e8;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    header .version { font-size: 0.85rem; color: #7aabde; }
+    .header-stripe { height: 6px; background: var(--secondary); }
+    .header-meta {
+      background: #fff;
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+    .meta-item {
+      padding: 16px 20px;
+      border-right: 1px solid var(--border);
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .meta-value { font-size: 0.9rem; }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 860px;
+      margin: 32px auto 64px;
+      padding: 0 24px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+
+    /* ── HEADINGS ── */
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 3px solid var(--secondary);
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+    }
+    h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin: 22px 0 10px;
+    }
+
+    p { margin-bottom: 14px; text-align: justify; }
+
+    /* ── TABLE ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 0.9rem;
+    }
+    th {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: var(--light-bg); }
+    td.label {
+      background: var(--accent-bg);
+      font-weight: 600;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    /* ── CHECK / CROSS LISTS ── */
+    ul.checks, ul.crosses, ul.bullets {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+    }
+    ul.checks li, ul.crosses li, ul.bullets li {
+      padding: 5px 0 5px 30px;
+      position: relative;
+      text-align: justify;
+    }
+    ul.checks li::before {
+      content: "✔";
+      color: var(--green);
+      font-weight: 700;
+      position: absolute;
+      left: 6px;
+    }
+    ul.crosses li::before {
+      content: "✘";
+      color: var(--red);
+      font-weight: 700;
+      position: absolute;
+      left: 6px;
+    }
+    ul.bullets li::before {
+      content: "•";
+      color: var(--secondary);
+      font-weight: 700;
+      position: absolute;
+      left: 8px;
+    }
+    ul.crosses li { color: var(--red); }
+
+    /* ── INFO BOXES ── */
+    .info-box {
+      background: var(--accent-bg);
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 6px 6px 0;
+      padding: 16px 20px;
+      margin: 18px 0;
+    }
+    .info-box.green {
+      background: var(--green-bg);
+      border-color: var(--green);
+    }
+    .info-box.red {
+      background: var(--red-bg);
+      border-color: var(--red);
+    }
+    .info-box.warn {
+      background: var(--warn-bg);
+      border-color: var(--warn-border);
+    }
+    .info-box strong { display: block; margin-bottom: 6px; color: var(--primary); }
+    .info-box.red strong { color: var(--red); }
+    .info-box.green strong { color: var(--green); }
+
+    /* ── CONTACT BOX ── */
+    .contact-box {
+      background: var(--accent-bg);
+      border: 1px solid var(--secondary);
+      border-radius: 8px;
+      padding: 22px 28px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .contact-box strong { color: var(--primary); font-size: 1rem; display: block; margin-bottom: 6px; }
+    .contact-box a { color: var(--secondary); text-decoration: none; font-weight: 600; }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── ZERO TOLERANCE BANNER ── */
+    .zero-tolerance {
+      background: var(--red-bg);
+      border: 2px solid var(--red);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 18px 0;
+      text-align: center;
+    }
+    .zero-tolerance .zt-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--red);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .zero-tolerance p { color: var(--red); text-align: center; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.7rem; }
+      .header-meta { grid-template-columns: 1fr; }
+      .meta-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .card { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="subtitle">App Falleros</div>
+    <h1>Estándares de Seguridad Infantil</h1>
+    <div class="version">Declaración de conformidad · Vigente desde el 06 de marzo de 2026</div>
+  </div>
+  <div class="header-stripe"></div>
+  <div class="header-meta">
+    <div class="meta-item">
+      <div class="meta-label">Responsable</div>
+      <div class="meta-value">Araceli Teruel Domenech</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Contacto</div>
+      <div class="meta-value">info@araceliteruel.es</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Público objetivo</div>
+      <div class="meta-value">Mayores de 18 años</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1 -->
+  <section class="card">
+    <h2>1. Declaración de Público Objetivo</h2>
+    <div class="info-box">
+      <strong>🔒 Aplicación exclusivamente para mayores de 18 años</strong>
+      La aplicación App Falleros está diseñada, desarrollada y destinada únicamente a usuarios adultos mayores de 18 años. La aplicación no está dirigida a menores de edad ni diseñada para ser utilizada por ellos de forma directa o independiente.
+    </div>
+    <p>Los menores de edad únicamente pueden aparecer en la aplicación en la modalidad de «perfil familiar vinculado», siempre:</p>
+    <ul class="bullets">
+      <li>Creado y gestionado íntegramente por el adulto responsable (padre, madre o tutor legal) que dispone de la cuenta principal.</li>
+      <li>Con el propósito específico y limitado de gestionar su participación en actividades de la asociación fallera.</li>
+      <li>Sin que el menor tenga acceso directo, credenciales propias ni capacidad de interacción autónoma con la aplicación.</li>
+    </ul>
+  </section>
+
+  <!-- 2 -->
+  <section class="card">
+    <h2>2. Contenidos de la Aplicación</h2>
+
+    <h3>2.1 Naturaleza y clasificación del contenido</h3>
+    <p>La aplicación App Falleros es una herramienta de gestión comunitaria para asociaciones falleras. Sus funcionalidades son de naturaleza organizativa y administrativa:</p>
+    <ul class="checks">
+      <li>Gestión de perfil de socio y núcleo familiar.</li>
+      <li>Consulta y compra de bonos y actividades de la asociación.</li>
+      <li>Inscripción a listas y eventos organizados por la falla.</li>
+      <li>Consulta de actas y convocatorias de la junta.</li>
+      <li>Sistema de monedero virtual y procesamiento de pagos (Redsys).</li>
+      <li>Notificaciones push de la asociación.</li>
+      <li>Código QR para identificación y pago en eventos.</li>
+    </ul>
+
+    <h3>2.2 Contenido prohibido – La aplicación NO contiene:</h3>
+    <ul class="crosses">
+      <li>Contenido violento, sexual o para adultos.</li>
+      <li>Foros, chats públicos u otras funcionalidades de comunicación entre usuarios desconocidos.</li>
+      <li>Publicidad dirigida o perfilado conductual de usuarios.</li>
+      <li>Contenido generado por usuarios anónimos sin moderación.</li>
+      <li>Compras en la aplicación no supervisadas (in-app purchases sin autenticación del adulto).</li>
+    </ul>
+  </section>
+
+  <!-- 3 -->
+  <section class="card">
+    <h2>3. Medidas de Protección de Menores</h2>
+
+    <h3>3.1 Control de acceso y autenticación</h3>
+    <p>La aplicación implementa un sistema de acceso que impide el uso no autorizado por menores:</p>
+    <ul class="bullets">
+      <li>Registro únicamente posible para mayores de 18 años, con declaración explícita de mayoría de edad en el proceso de alta.</li>
+      <li>Autenticación obligatoria mediante credenciales (correo electrónico y contraseña) para cualquier acceso a la aplicación.</li>
+      <li>La creación de cuentas y perfiles es manual y supervisada; no existe registro abierto ni automático.</li>
+      <li>Los tokens de sesión tienen caducidad y no permiten el acceso indefinido sin nueva autenticación.</li>
+    </ul>
+
+    <h3>3.2 Privacidad de los perfiles de menores</h3>
+    <p>Respecto a los datos de menores gestionados por adultos responsables:</p>
+    <ul class="bullets">
+      <li>Los datos del menor son visibles únicamente para el titular de la cuenta adulta que los registró y para los administradores de la asociación.</li>
+      <li>No se publican ni comparten datos de menores en perfiles públicos, redes sociales ni con terceros no autorizados.</li>
+      <li>Los datos se limitan al mínimo necesario: nombre, apellidos y fecha de nacimiento.</li>
+      <li>No se recaban datos de localización, biométricos ni de conducta de los menores.</li>
+      <li>Las fotografías de perfil son opcionales y se aplican solo a la cuenta del adulto, no a los perfiles de menores.</li>
+    </ul>
+
+    <h3>3.3 Seguridad en las transacciones económicas</h3>
+    <ul class="bullets">
+      <li>Las compras y transacciones requieren autenticación activa del usuario adulto titular de la cuenta.</li>
+      <li>El procesamiento de pagos se delega en Redsys, plataforma certificada PCI-DSS, sin almacenar datos de tarjetas en la aplicación.</li>
+      <li>Los códigos QR de pago son de uso personal, cifrados con HMAC-SHA256 y caducan automáticamente cada 30 segundos.</li>
+    </ul>
+  </section>
+
+  <!-- 4 -->
+  <section class="card">
+    <h2>4. Datos Personales de Menores – Tratamiento y Base Legal</h2>
+    <div class="info-box">
+      <strong>Base legal para el tratamiento de datos de menores</strong>
+      El artículo 8 del RGPD y el artículo 7 de la LOPDGDD establecen que el consentimiento para el tratamiento de datos de menores de 14 años debe ser otorgado por sus padres o tutores legales. En la aplicación App Falleros, el adulto titular de la cuenta presta ese consentimiento en nombre del menor al registrar su perfil familiar.
+    </div>
+    <table>
+      <thead>
+        <tr><th>Principio</th><th>Aplicación en App Falleros</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="label">Minimización</td><td>Solo se recaban nombre, apellidos y fecha de nacimiento, estrictamente necesarios para la inscripción a actividades de la asociación.</td></tr>
+        <tr><td class="label">Limitación de finalidad</td><td>Los datos del menor se usan únicamente para gestionar su participación en actividades de la falla; no se usan para fines de marketing, perfilado ni cesión.</td></tr>
+        <tr><td class="label">Consentimiento parental</td><td>El adulto responsable acepta explícitamente las condiciones de uso y política de privacidad al registrarse, ejerciendo el consentimiento en nombre del menor.</td></tr>
+        <tr><td class="label">Acceso restringido</td><td>Los datos del menor son accesibles solo para el adulto que los registró y para los administradores de la asociación con fines de gestión interna.</td></tr>
+        <tr><td class="label">Derecho de supresión</td><td>El adulto responsable puede eliminar en cualquier momento el perfil del menor desde la aplicación o solicitando la baja a info@araceliteruel.es.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5 -->
+  <section class="card">
+    <h2>5. Canal de Denuncia y Reporte de Seguridad</h2>
+    <p>App Falleros establece un canal dedicado para reportar cualquier contenido, comportamiento o situación que pudiera suponer un riesgo para la seguridad de menores:</p>
+    <div class="info-box green">
+      <strong>✉️ Canal de reporte de seguridad infantil</strong>
+      Correo: <a href="mailto:info@araceliteruel.es">info@araceliteruel.es</a> – Asunto: «Seguridad Infantil – App Falleros»<br><br>
+      El responsable se compromete a acusar recibo en el plazo de 48 horas y a adoptar las medidas necesarias en el menor tiempo posible. En caso de sospechar actividad delictiva que afecte a menores, se pondrá en conocimiento inmediato de las autoridades competentes (Fuerzas y Cuerpos de Seguridad del Estado, Fiscalía de Menores).
+    </div>
+    <p>El responsable se compromete a:</p>
+    <ul class="bullets">
+      <li>Revisar y atender cualquier reporte de seguridad infantil en un plazo máximo de 48 horas hábiles.</li>
+      <li>Eliminar de forma inmediata cualquier cuenta o contenido que viole los estándares de seguridad infantil.</li>
+      <li>Colaborar plenamente con las autoridades en cualquier investigación relacionada con la seguridad de menores.</li>
+      <li>Notificar a la Agencia Española de Protección de Datos (AEPD) en caso de brecha de seguridad que afecte a datos de menores, en el plazo de 72 horas.</li>
+    </ul>
+  </section>
+
+  <!-- 6 -->
+  <section class="card">
+    <h2>6. Prohibición Explícita de Contenido CSAM</h2>
+    <div class="zero-tolerance">
+      <div class="zt-title">⛔ Política de Tolerancia Cero</div>
+      <p>La aplicación App Falleros tiene una política de tolerancia cero respecto a cualquier material de explotación o abuso sexual infantil (CSAM). Queda terminantemente prohibida la carga, almacenamiento, distribución o cualquier forma de tratamiento de dicho material a través de la aplicación.</p>
+    </div>
+    <p>En el caso de detectarse cualquier actividad de esta naturaleza:</p>
+    <ul class="bullets">
+      <li>La cuenta será suspendida de forma inmediata y permanente.</li>
+      <li>Se procederá a la denuncia ante las autoridades competentes (Policía Nacional, Guardia Civil, Fiscalía de Menores) sin demora.</li>
+      <li>Se reportará al Centro Nacional de Menores Desaparecidos y Explotados (NCMEC), conforme a la legislación aplicable.</li>
+      <li>Se cooperará plenamente con cualquier investigación judicial o policial.</li>
+    </ul>
+  </section>
+
+  <!-- 7 -->
+  <section class="card">
+    <h2>7. Conformidad con Google Play y Normativa Aplicable</h2>
+    <p>Esta declaración ha sido elaborada en cumplimiento de:</p>
+    <ul class="bullets">
+      <li>Política de Seguridad Infantil de Google Play Store (Family and Children's Policy).</li>
+      <li>Reglamento (UE) 2016/679 (RGPD), en particular el artículo 8 relativo al consentimiento de menores.</li>
+      <li>Ley Orgánica 3/2018 (LOPDGDD), artículo 7 sobre el consentimiento de menores de 14 años.</li>
+      <li>Convenio de Lanzarote (Convenio del Consejo de Europa para la protección de los niños contra la explotación y el abuso sexual).</li>
+      <li>Directiva (UE) 2011/93 relativa a la lucha contra los abusos sexuales y la explotación sexual de los menores.</li>
+    </ul>
+  </section>
+
+  <!-- 8 -->
+  <section class="card">
+    <h2>8. Actualización y Vigencia</h2>
+    <p>El responsable se compromete a revisar y actualizar este documento siempre que:</p>
+    <ul class="bullets">
+      <li>Se incorporen nuevas funcionalidades a la aplicación que puedan afectar al tratamiento de datos de menores.</li>
+      <li>Cambien los requisitos de la Política de Seguridad Infantil de Google Play Store.</li>
+      <li>Se produzcan modificaciones en la normativa aplicable.</li>
+    </ul>
+    <p>La versión actualizada de este documento estará siempre disponible en la ficha de la aplicación en Google Play Store y puede solicitarse en cualquier momento a <a href="mailto:info@araceliteruel.es">info@araceliteruel.es</a>.</p>
+  </section>
+
+  <div class="contact-box">
+    <strong>Responsable del cumplimiento de esta declaración</strong>
+    Araceli Teruel Domenech<br>
+    <a href="mailto:info@araceliteruel.es">info@araceliteruel.es</a> · 06 de marzo de 2026
+  </div>
+
+</main>
+
+<footer>
+  App Falleros · Estándares de Seguridad Infantil · Vigente desde el 06 de marzo de 2026 · Araceli Teruel Domenech
+</footer>
+
+</body>
+</html>
